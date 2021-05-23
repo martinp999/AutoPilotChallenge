@@ -1,0 +1,33 @@
+{
+  "name": "autopilot_web_challenge",
+  "version": "1.0.0",
+  "description": "test suite created with Cypress to address the Autopiloty Web Challnge as part of the interview process",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/martinp999/AutoPilotChallenge.git"
+  },
+  "keywords": [
+    "Cypress"
+  ],
+  "author": "Martin Payne",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/martinp999/AutoPilotChallenge/issues"
+  },
+  "homepage": "https://github.com/martinp999/AutoPilotChallenge#readme",
+  "dependencies": {
+    "@wdio/cli": "^7.6.0",
+    "chai": "^4.3.4"
+  },
+  "devDependencies": {
+    "@wdio/local-runner": "^7.6.0",
+    "@wdio/mocha-framework": "^7.6.0",
+    "@wdio/spec-reporter": "^7.6.0",
+    "chromedriver": "^90.0.1",
+    "wdio-chromedriver-service": "^7.1.0"
+  }
+}

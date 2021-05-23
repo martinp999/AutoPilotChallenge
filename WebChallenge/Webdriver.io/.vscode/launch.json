@@ -1,0 +1,34 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "wdio",
+      "type": "node",
+      "request": "launch",
+      "protocol": "inspector",
+      "address": "localhost",
+      "port": 5858,
+      "timeout": 20000,
+      // "env": {
+      // 	"DEBUG": "true",
+      // 	"npm_package_config_PLATFORM_NAME": "web"
+      // },
+      "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/wdio",
+      "windows": {
+        "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/wdio.cmd"
+      },
+      // "preLaunchTask": "tsc: build - tsconfig.json",
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      // This args config runs only the file that's open and displayed
+      // (e.g., a file in test/spec/):
+      "args": [
+        "wdio.debug.conf.js"
+        // "--inspect",
+      ]
+    }
+  ]
+}
