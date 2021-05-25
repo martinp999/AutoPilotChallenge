@@ -1,0 +1,704 @@
+{
+	"info": {
+		"_postman_id": "03fa439f-3131-4260-8d45-8157196102ac",
+		"name": "Open Weather API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "City Only Default Units",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const schema = JSON.parse(pm.environment.get(\"schema\"));\r",
+							"pm.test(\"Validate schema\", () => {\r",
+							"    pm.response.to.have.jsonSchema(schema);\r",
+							"});\r",
+							"\r",
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"//co-ordinates of the city should remain the same\r",
+							"let city = pm.environment.get(\"city_1\");\r",
+							"let lon = Number(pm.environment.get(`${city}_NSW_AU_lon`));\r",
+							"let lat = Number(pm.environment.get(`${city}_NSW_AU_lat`));\r",
+							"pm.test(\"Ensure longitute\", function () {\r",
+							"    pm.expect(jsonData.coord.lon).to.eql(lon);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Ensure latitude\", function () {\r",
+							"    pm.expect(jsonData.coord.lat).to.eql(lat);\r",
+							"});\r",
+							"\r",
+							"//Kelvin cannot be below zero (although other scales can be, so we can't assert on the schema)\r",
+							"pm.test(\"Ensure jsonData.main.temp not less than zero\", function () {\r",
+							"    pm.expect(!(jsonData.main.temp < 0)).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Ensure jsonData.main.feels_like not less than zero\", function () {\r",
+							"    pm.expect(!(jsonData.main.feels_like < 0)).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Ensure jsonData.main.temp_min not less than zero\", function () {\r",
+							"    pm.expect(!(jsonData.main.temp_min < 0)).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Ensure jsonData.main.temp_max not less than zero\", function () {\r",
+							"    pm.expect(!(jsonData.main.temp_max < 0)).to.be.true;\r",
+							"});\r",
+							"\r",
+							"\r",
+							"// pm.environment.set(\"swap_temp_kelvin\", jsonData.main.temp);\r",
+							"// pm.environment.set(\"swap_feels_like_kelvin\", jsonData.main.feels_like);\r",
+							"// pm.environment.set(\"swap_temp_min_kelvin\", jsonData.main.temp_min);\r",
+							"// pm.environment.set(\"swap_temp_max_kelvin\", jsonData.main.temp_max);\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{domain}}/{{route}}?q={{city_1}}&appid={{apikey}}",
+					"protocol": "http",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"{{route}}"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "{{city_1}}"
+						},
+						{
+							"key": "appid",
+							"value": "{{apikey}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "City Only XML",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const schema = JSON.parse(pm.environment.get(\"schema\"));\r",
+							"pm.test(\"Validate schema\", () => {\r",
+							"    pm.response.to.have.jsonSchema(schema);\r",
+							"});\r",
+							"\r",
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"//co-ordinates of the city should remain the same\r",
+							"let city = pm.environment.get(\"city_1\");\r",
+							"let lon = Number(pm.environment.get(`${city}_NSW_AU_lon`));\r",
+							"let lat = Number(pm.environment.get(`${city}_NSW_AU_lat`));\r",
+							"pm.test(\"Ensure longitute\", function () {\r",
+							"    pm.expect(jsonData.coord.lon).to.eql(lon);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Ensure latitude\", function () {\r",
+							"    pm.expect(jsonData.coord.lat).to.eql(lat);\r",
+							"});\r",
+							"\r",
+							"//Kelvin cannot be below zero (although other scales can be, so we can't assert on the schema)\r",
+							"pm.test(\"Ensure jsonData.main.temp not less than zero\", function () {\r",
+							"    pm.expect(!(jsonData.main.temp < 0)).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Ensure jsonData.main.feels_like not less than zero\", function () {\r",
+							"    pm.expect(!(jsonData.main.feels_like < 0)).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Ensure jsonData.main.temp_min not less than zero\", function () {\r",
+							"    pm.expect(!(jsonData.main.temp_min < 0)).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Ensure jsonData.main.temp_max not less than zero\", function () {\r",
+							"    pm.expect(!(jsonData.main.temp_max < 0)).to.be.true;\r",
+							"});\r",
+							"\r",
+							"\r",
+							"// pm.environment.set(\"swap_temp_kelvin\", jsonData.main.temp);\r",
+							"// pm.environment.set(\"swap_feels_like_kelvin\", jsonData.main.feels_like);\r",
+							"// pm.environment.set(\"swap_temp_min_kelvin\", jsonData.main.temp_min);\r",
+							"// pm.environment.set(\"swap_temp_max_kelvin\", jsonData.main.temp_max);\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{domain}}/{{route}}?q={{city_1}}&appid={{apikey}}&mode=xml",
+					"protocol": "http",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"{{route}}"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "{{city_1}}"
+						},
+						{
+							"key": "appid",
+							"value": "{{apikey}}"
+						},
+						{
+							"key": "mode",
+							"value": "xml"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "City and State Only Default Units",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const schema = JSON.parse(pm.environment.get(\"schema\"));\r",
+							"pm.test(\"Validate schema\", () => {\r",
+							"    pm.response.to.have.jsonSchema(schema);\r",
+							"});\r",
+							"\r",
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"//co-ordinates of the city should remain the same\r",
+							"let city = pm.environment.get(\"city_2\");\r",
+							"let state = pm.environment.get(\"state_2\");\r",
+							"let lon = Number(pm.environment.get(`${city}_${state}_US_lon`));\r",
+							"let lat = Number(pm.environment.get(`${city}_${state}_US_lat`));\r",
+							"pm.test(\"Ensure longitute\", function () {\r",
+							"    pm.expect(jsonData.coord.lon).to.eql(lon);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Ensure latitude\", function () {\r",
+							"    pm.expect(jsonData.coord.lat).to.eql(lat);\r",
+							"});\r",
+							"\r",
+							"//Kelvin cannot be below zero (although other scales can be, so we can't assert on the schema)\r",
+							"pm.test(\"Ensure jsonData.main.temp not less than zero\", function () {\r",
+							"    pm.expect(!(jsonData.main.temp < 0)).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Ensure jsonData.main.feels_like not less than zero\", function () {\r",
+							"    pm.expect(!(jsonData.main.feels_like < 0)).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Ensure jsonData.main.temp_min not less than zero\", function () {\r",
+							"    pm.expect(!(jsonData.main.temp_min < 0)).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Ensure jsonData.main.temp_max not less than zero\", function () {\r",
+							"    pm.expect(!(jsonData.main.temp_max < 0)).to.be.true;\r",
+							"});\r",
+							"\r",
+							"\r",
+							"// pm.environment.set(\"swap_temp_kelvin\", jsonData.main.temp);\r",
+							"// pm.environment.set(\"swap_feels_like_kelvin\", jsonData.main.feels_like);\r",
+							"// pm.environment.set(\"swap_temp_min_kelvin\", jsonData.main.temp_min);\r",
+							"// pm.environment.set(\"swap_temp_max_kelvin\", jsonData.main.temp_max);\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{domain}}/{{route}}?q={{city_2}},{{state_2}}&appid={{apikey}}",
+					"protocol": "http",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"{{route}}"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "{{city_2}},{{state_2}}"
+						},
+						{
+							"key": "appid",
+							"value": "{{apikey}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "City, State and Country Default Units Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const schema = JSON.parse(pm.environment.get(\"schema\"));\r",
+							"pm.test(\"Validate schema\", () => {\r",
+							"    pm.response.to.have.jsonSchema(schema);\r",
+							"});\r",
+							"\r",
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"//co-ordinates of the city should remain the same\r",
+							"let city = pm.environment.get(\"city_2\");\r",
+							"let state = pm.environment.get(\"state_2\");\r",
+							"let lon = Number(pm.environment.get(`${city}_${state}_US_lon`));\r",
+							"let lat = Number(pm.environment.get(`${city}_${state}_US_lat`));\r",
+							"pm.test(\"Ensure longitute\", function () {\r",
+							"    pm.expect(jsonData.coord.lon).to.eql(lon);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Ensure latitude\", function () {\r",
+							"    pm.expect(jsonData.coord.lat).to.eql(lat);\r",
+							"});\r",
+							"\r",
+							"//Kelvin cannot be below zero (although other scales can be, so we can't assert on the schema)\r",
+							"pm.test(\"Ensure jsonData.main.temp not less than zero\", function () {\r",
+							"    pm.expect(!(jsonData.main.temp < 0)).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Ensure jsonData.main.feels_like not less than zero\", function () {\r",
+							"    pm.expect(!(jsonData.main.feels_like < 0)).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Ensure jsonData.main.temp_min not less than zero\", function () {\r",
+							"    pm.expect(!(jsonData.main.temp_min < 0)).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Ensure jsonData.main.temp_max not less than zero\", function () {\r",
+							"    pm.expect(!(jsonData.main.temp_max < 0)).to.be.true;\r",
+							"});\r",
+							"\r",
+							"\r",
+							"// pm.environment.set(\"swap_temp_kelvin\", jsonData.main.temp);\r",
+							"// pm.environment.set(\"swap_feels_like_kelvin\", jsonData.main.feels_like);\r",
+							"// pm.environment.set(\"swap_temp_min_kelvin\", jsonData.main.temp_min);\r",
+							"// pm.environment.set(\"swap_temp_max_kelvin\", jsonData.main.temp_max);\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{domain}}/{{route}}?q={{city_2}},{{state_2}},{{country_2}}&appid={{apikey}}",
+					"protocol": "http",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"{{route}}"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "{{city_2}},{{state_2}},{{country_2}}"
+						},
+						{
+							"key": "appid",
+							"value": "{{apikey}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "City Only - Invalid City",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"const schema = JSON.parse(pm.environment.get(\"schema_error\"));\r",
+							"pm.test(\"Validate schema\", () => {\r",
+							"    pm.response.to.have.jsonSchema(schema);\r",
+							"});\r",
+							"\r",
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"cod is 404\", () => {\r",
+							"    pm.expect(jsonData.cod).to.eq(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"validate message\", () => {\r",
+							"    pm.expect(jsonData.message).to.eq(\"city not found\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{domain}}/{{route}}?q={{city_invalid}}&appid={{apikey}}",
+					"protocol": "http",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"{{route}}"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "{{city_invalid}}"
+						},
+						{
+							"key": "appid",
+							"value": "{{apikey}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "No API Key",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 401\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"});\r",
+							"\r",
+							"const schema = JSON.parse(pm.environment.get(\"schema_error\"));\r",
+							"pm.test(\"Validate schema\", () => {\r",
+							"    pm.response.to.have.jsonSchema(schema);\r",
+							"});\r",
+							"\r",
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"cod is 401\", () => {\r",
+							"    pm.expect(jsonData.cod).to.eq(401);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"validate message\", () => {\r",
+							"    pm.expect(jsonData.message).to.eq(\"Invalid API key. Please see http://openweathermap.org/faq#error401 for more info.\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{domain}}/{{route}}?q={{city_1}}",
+					"protocol": "http",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"{{route}}"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "{{city_1}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "City Only Celsius",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const schema = JSON.parse(pm.environment.get(\"schema\"));\r",
+							"pm.test(\"Validate schema\", () => {\r",
+							"    pm.response.to.have.jsonSchema(schema);\r",
+							"});\r",
+							"\r",
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"//co-ordinates of the city should remain the same\r",
+							"let city = pm.environment.get(\"city_1\");\r",
+							"let lon = Number(pm.environment.get(`${city}_NSW_AU_lon`));\r",
+							"let lat = Number(pm.environment.get(`${city}_NSW_AU_lat`));\r",
+							"pm.test(\"Ensure longitute\", function () {\r",
+							"    pm.expect(jsonData.coord.lon).to.eql(lon);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Ensure latitude\", function () {\r",
+							"    pm.expect(jsonData.coord.lat).to.eql(lat);\r",
+							"});\r",
+							"\r",
+							"// if (pm.environment.has(\"swap_temp_kelvin\")){\r",
+							"//     function kelvinToCelsius(k) {return k - 273.15;}\r",
+							"//     pm.test(\"Ensure temp celsius\", function () {\r",
+							"//         pm.expect(jsonData.main.temp).to.eql(kelvinToCelsius(pm.environment.get(\"swap_temp_kelvin\")));\r",
+							"//     });\r",
+							"//     pm.test(\"Ensure feels_like celsius\", function () {\r",
+							"//         pm.expect(jsonData.main.feels_like).to.eql(kelvinToCelsius(pm.environment.get(\"swap_feels_like_kelvin\")));\r",
+							"//     });\r",
+							"//     pm.test(\"Ensure temp_min celsius\", function () {\r",
+							"//         pm.expect(jsonData.main.temp_min).to.eql(kelvinToCelsius(pm.environment.get(\"swap_temp_min_kelvin\")));\r",
+							"//     });\r",
+							"//     pm.test(\"Ensure temp_max celsius\", function () {\r",
+							"//         pm.expect(jsonData.main.temp_max).to.eql(kelvinToCelsius(pm.environment.get(\"swap_temp_max_kelvin\")));\r",
+							"//     });\r",
+							"// }\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{domain}}/{{route}}?q={{city_1}},NSW,AU&units=metric&appid={{apikey}}",
+					"protocol": "http",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"{{route}}"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "{{city_1}},NSW,AU"
+						},
+						{
+							"key": "units",
+							"value": "metric"
+						},
+						{
+							"key": "appid",
+							"value": "{{apikey}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "City Only Invalid Units",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//The API seems to just ignore the units if it has an unknown value and use the default value instead.  Not sure that is a fault or not?\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const schema = JSON.parse(pm.environment.get(\"schema\"));\r",
+							"pm.test(\"Validate schema\", () => {\r",
+							"    pm.response.to.have.jsonSchema(schema);\r",
+							"});\r",
+							"\r",
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"//co-ordinates of the city should remain the same\r",
+							"let city = pm.environment.get(\"city_1\");\r",
+							"let lon = Number(pm.environment.get(`${city}_NSW_AU_lon`));\r",
+							"let lat = Number(pm.environment.get(`${city}_NSW_AU_lat`));\r",
+							"pm.test(\"Ensure longitute\", function () {\r",
+							"    pm.expect(jsonData.coord.lon).to.eql(lon);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Ensure latitude\", function () {\r",
+							"    pm.expect(jsonData.coord.lat).to.eql(lat);\r",
+							"});\r",
+							"\r",
+							"// if (pm.environment.has(\"swap_temp_kelvin\")){\r",
+							"//     function kelvinToCelsius(k) {return k - 273.15;}\r",
+							"//     pm.test(\"Ensure temp celsius\", function () {\r",
+							"//         pm.expect(jsonData.main.temp).to.eql(kelvinToCelsius(pm.environment.get(\"swap_temp_kelvin\")));\r",
+							"//     });\r",
+							"//     pm.test(\"Ensure feels_like celsius\", function () {\r",
+							"//         pm.expect(jsonData.main.feels_like).to.eql(kelvinToCelsius(pm.environment.get(\"swap_feels_like_kelvin\")));\r",
+							"//     });\r",
+							"//     pm.test(\"Ensure temp_min celsius\", function () {\r",
+							"//         pm.expect(jsonData.main.temp_min).to.eql(kelvinToCelsius(pm.environment.get(\"swap_temp_min_kelvin\")));\r",
+							"//     });\r",
+							"//     pm.test(\"Ensure temp_max celsius\", function () {\r",
+							"//         pm.expect(jsonData.main.temp_max).to.eql(kelvinToCelsius(pm.environment.get(\"swap_temp_max_kelvin\")));\r",
+							"//     });\r",
+							"// }\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{domain}}/{{route}}?q={{city_1}},NSW,AU&units=blah&appid={{apikey}}",
+					"protocol": "http",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"{{route}}"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "{{city_1}},NSW,AU"
+						},
+						{
+							"key": "units",
+							"value": "blah"
+						},
+						{
+							"key": "appid",
+							"value": "{{apikey}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

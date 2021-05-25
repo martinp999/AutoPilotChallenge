@@ -1,0 +1,209 @@
+{
+    "type": "object",
+    "properties": {
+        "coord": {
+            "type": "object",
+            "properties": {
+                "lon": {
+                    "type": "number",
+                    "minimum": -180,
+                    "maximum": 180
+                },
+                "lat": {
+                    "type": "number",
+                    "minimum": -90,
+                    "maximum": 90
+                }
+            },
+            "required": [
+                "lon",
+                "lat"
+            ]
+        },
+        "weather": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number",
+                        "multipleOf": 1.0
+                    },
+                    "main": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "icon": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "id",
+                    "main"
+                ]
+            },
+            "required": [
+                "lon",
+                "lat"
+            ]
+        },
+        "base": {
+            "type": "string"
+        },
+        "main": {
+            "type": "object",
+            "properties": {
+                "temp": {
+                    "type": "number"
+                },
+                "feels_like": {
+                    "type": "number"
+                },
+                "temp_min": {
+                    "type": "number"
+                },
+                "temp_max": {
+                    "type": "number"
+                },
+                "pressure": {
+                    "type": "number"
+                },
+                "humidity": {
+                    "type": "number",
+                    "minimum": 0,
+                    "exclusiveMaximum": 100
+                }
+            },
+            "required": [
+                "temp",
+                "pressure",
+                "humidity"
+            ]
+        },
+        "visibility": {
+            "type": "number"
+        },
+        "wind": {
+            "type": "object",
+            "properties": {
+                "speed": {
+                    "type": "number",
+                    "minimum": 0
+                },
+                "deg": {
+                    "type": "number"
+                },
+                "gust": {
+                    "type": "number",
+                    "minimum": 0
+                }
+            },
+            "required": [
+                "speed",
+                "deg"
+            ]
+        },
+        "clouds": {
+            "type": "object",
+            "properties": {
+                "all": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 100
+                }
+            },
+            "required": []
+        },
+        "rain": {
+            "type": "object",
+            "properties": {
+                "1h": {
+                    "type": "number",
+                    "multipleOf": 1.0,
+                    "minimum": 0
+                },
+                "3h": {
+                    "type": "number",
+                    "multipleOf": 1.0,
+                    "minimum": 0
+                }
+            },
+            "required": []
+        },
+        "snow": {
+            "type": "object",
+            "properties": {
+                "1h": {
+                    "type": "number",
+                    "multipleOf": 1.0,
+                    "minimum": 0
+                },
+                "3h": {
+                    "type": "number",
+                    "multipleOf": 1.0,
+                    "minimum": 0
+                }
+            },
+            "required": []
+        },
+        "dt": {
+            "type": "number",
+            "multipleOf": 1.0
+        },
+        "sys": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "number",
+                    "multipleOf": 1.0
+                },
+                "id": {
+                    "type": "number",
+                    "multipleOf": 1.0
+                },
+                "country": {
+                    "type": "string"
+                },
+                "sunrise": {
+                    "type": "number",
+                    "multipleOf": 1.0
+                },
+                "sunset": {
+                    "type": "number",
+                    "multipleOf": 1.0
+                }
+            },
+            "required": [
+                "type",
+                "id",
+                "country",
+                "sunrise",
+                "sunset"
+            ]
+        },
+        "timezone": {
+            "type": "number",
+            "multipleOf": 1.0
+        },
+        "id": {
+            "type": "number",
+            "multipleOf": 1.0
+        },
+        "name": {
+            "type": "string"
+        },
+        "cod": {
+            "type": "number",
+            "multipleOf": 1.0
+        }
+    },
+    "required": [
+        "coord",
+        "weather",
+        "main",
+        "timezone",
+        "id"
+    ]
+}

@@ -1,0 +1,16 @@
+{
+    "type": "object",
+    "properties": {
+        "cod": {
+            "type": "number",
+            "multipleOf": 1.0
+        },
+        "message": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "cod",
+        "message"
+    ]
+}
