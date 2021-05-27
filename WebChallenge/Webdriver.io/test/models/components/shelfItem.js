@@ -24,18 +24,21 @@ module.exports = class ShelfItem {
     });
   }
 
-  async getPriceString() {
+  async getPrice() {
     let $el = await this.$el.$("[itemprop='price']");
     let text = await $el.getHTML(false);
     let res = text.match(/(\d)*\.(\d){2}/);
     let strPrice = res[0];
-    let price = Number[strPrice]; //returning a number makes the async go crazy????
-    return strPrice;
+    return new Promise((resolve) => resolve(Number(strPrice)));
   }
 
   async getName() {
     let $el = await this.$el.$("[itemprop='name'] a");
     let text = await $el.getAttribute("title");
     return text;
+  }
+
+  async getClickableElement() {
+    return await this.$el.$(".product-image-container");
   }
 };

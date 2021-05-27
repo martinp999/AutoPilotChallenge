@@ -1,7 +1,9 @@
 const Page = require("./page");
 const Tabs = require("../components/tabs");
+const CartDialog = require("../pages/cartDialog");
+const CartWidget = require("../components/cartWidget");
 
-class HomePage extends Page {
+module.exports = class HomePage extends Page {
   open() {
     return super.open("index.php");
   }
@@ -9,7 +11,16 @@ class HomePage extends Page {
   async getTabs() {
     return new Tabs(await $("#home-page-tabs"));
   }
-}
 
-// module.exports = new HomePage();
-module.exports = HomePage;
+  async getCartDialog() {
+    return new CartDialog(await $("#layer_cart"));
+  }
+
+  async getCartWidget() {
+    return new CartWidget(await $(".shopping_cart"));
+  }
+
+  async switchTo() {
+    return await browser.switchToFrame(null);
+  }
+};

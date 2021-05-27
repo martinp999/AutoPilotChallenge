@@ -7,6 +7,8 @@ exports.config = {
   // WebdriverIO allows it to run your tests in arbitrary locations (e.g. locally or
   // on a remote machine).
   runner: "local",
+  specs: ["./test/specs/main.spec.js"],
+  // specs: ["./test/specs/sandbox.spec.js"],
   //
   // ==================
   // Specify Test Files
@@ -23,7 +25,6 @@ exports.config = {
   // then the current working directory is where your `package.json` resides, so `wdio`
   // will be called from there.
   //
-  specs: ["./test/specs/spec1.spec.js"],
   // Patterns to exclude.
   exclude: [
     // 'path/to/excluded/files'
